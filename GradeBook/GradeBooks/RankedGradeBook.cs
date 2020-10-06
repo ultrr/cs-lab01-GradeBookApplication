@@ -7,7 +7,7 @@
             Type = Enums.GradeBookType.Ranked;
         }
 
-        override public char GetLetterGrade(double averageGrade)
+        public override char GetLetterGrade(double averageGrade)
         {
             if (Students.Count < 5) throw new System.InvalidOperationException();
 
@@ -16,12 +16,13 @@
             int Higher = 0;
             foreach (var student in Students)
             {
-                if (student.AverageGrade > averageGrade) Higher++;
+                if (student.AverageGrade >= averageGrade) Higher++;
             }
+            Higher--;
 
-            //int Result = Higher / TwentyPercent;
+            int Result = Higher / TwentyPercent;
 
-            switch(Higher / TwentyPercent)
+            switch(Result)
             {
                 case 0:
                     return 'A';

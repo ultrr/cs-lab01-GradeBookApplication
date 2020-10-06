@@ -108,25 +108,26 @@ namespace GradeBook.GradeBooks
 
         public virtual double GetGPA(char letterGrade, StudentType studentType)
         {
-            int a;
-            if (studentType == StudentType.Honors || studentType == StudentType.DualEnrolled) a = 1;
-            else a = 0;
+            //weighted a student's grade when the gradebook was not weighted.
 
+            int a;
+            if ((studentType == StudentType.Honors || studentType == StudentType.DualEnrolled) && IsWeighted == true) a = 1;
+            else a = 0;
 
             switch (letterGrade)
             {
                 case 'A':
-                    return 4 + a;
+                    return (4 + a);
                 case 'B':
-                    return 3 + a;
+                    return (3 + a);
                 case 'C':
-                    return 2 + a;
+                    return (2 + a);
                 case 'D':
-                    return 1 + a;
+                    return (1 + a);
                 case 'F':
-                    return 0 + a;
+                    return (0 + a);
             }
-            return 0 + a;
+            return (0 + a);
         }
 
         public virtual void CalculateStatistics()
@@ -274,9 +275,9 @@ namespace GradeBook.GradeBooks
             return JsonConvert.DeserializeObject(json, gradebook);
         }
 
-        public GradeBookType Type;
+        public GradeBookType Type { get; set; }
 
-        public bool IsWeighted;
+        public bool IsWeighted { get; set; }
 
 
 
